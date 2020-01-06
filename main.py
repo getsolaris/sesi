@@ -13,6 +13,8 @@ import time
 import threading
 from tqdm import tqdm
 
+VERSION = '0.1'
+
 def unzip(source_file, dest_path):
     with zipfile.ZipFile(source_file, 'r') as zf:
         zf.extractall(path=dest_path)
@@ -195,7 +197,7 @@ class Application(tk.Frame):
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title('SuddenAttack Easy Skin Installer')
+    root.title('SuddenAttack Easy Skin Installer v' + VERSION)
     root.geometry('500x300+0+50')
     root.resizable(False, False)
     root.maxsize(width=500, height=320)
