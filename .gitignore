@@ -1,0 +1,8 @@
+build
+dist
+zs.zip
+saskin.cfg
+.idea
+__pycache__
+venv
+main.spec
