@@ -211,7 +211,7 @@ class Application(tk.Frame):
         checked = False
 
         if self.map_supply_checked.get() > 0:
-            time.sleep(1)
+            time.sleep(3)
             url = url_path('map_supply', self.map_supply_checked.get()) + '/download'
             checked = True
             self.download_process('보급창고', url, self.search_path + '\\map_supply.zip', self.search_path + '\\game\\sa_tex')
@@ -223,7 +223,7 @@ class Application(tk.Frame):
             self.download_process('형광', url, self.search_path + '\\weapon_flu.zip', self.search_path + '\\game')
 
         if self.scope_checked.get() > 0:
-            time.sleep(1)
+            time.sleep(3)
             url = url_path('scope', self.scope_checked.get()) + '/download'
             checked = True
             self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface1\\hud\\scope')
@@ -231,6 +231,10 @@ class Application(tk.Frame):
         if not checked:
             self.progress_text['text'] = '스킨을 선택해주세요. (선택 안되어있음)'
             return
+
+        self.map_supply_checked.set(None)
+        self.weapon_1_checked.set(None)
+        self.scope_checked.set(None)
 
 
     def download_process(self, section, url, download_path, target):
