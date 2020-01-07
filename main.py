@@ -58,7 +58,7 @@ class Application(tk.Frame):
         else:
             config = configparser.RawConfigParser()
             config.read('saskin.cfg')
-            if not config['SuddenAttack']['PATH']: # None 일 경우
+            if config['SuddenAttack']['PATH'] == 'None': # None 일 경우
                 self.progress_text['text'] = 'saskin.cfg 파일에서 서든어택 경로를 불러오지 못했습니다.'
                 time.sleep(1)
                 self.progress_text['text'] = '서든어택 경로를 탐색해주세요.'
