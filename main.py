@@ -58,10 +58,15 @@ class Application(tk.Frame):
         else:
             config = configparser.RawConfigParser()
             config.read('saskin.cfg')
-            self.search_path = config['SuddenAttack']['PATH']
-            self.path_search['text'] = config['SuddenAttack']['PATH']
-            self.install['state'] = 'normal'
-            self.progress_text['text'] = 'saskin.cfg 파일에서 서든어택 경로를 불러왔습니다.'
+            if not config['SuddenAttack']['PATH']: # None 일 경우
+                self.progress_text['text'] = 'saskin.cfg 파일에서 서든어택 경로를 불러오지 못했습니다.'
+                time.sleep(1)
+                self.progress_text['text'] = '서든어택 경로를 탐색해주세요.'
+            else:
+                self.search_path = config['SuddenAttack']['PATH']
+                self.path_search['text'] = config['SuddenAttack']['PATH']
+                self.install['state'] = 'normal'
+                self.progress_text['text'] = 'saskin.cfg 파일에서 서든어택 경로를 불러왔습니다.'
 
     def create_widgets(self):
         self.progress_text_label = tk.Label(root, text='Log >')
