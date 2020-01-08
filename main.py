@@ -226,7 +226,7 @@ class Application(tk.Frame):
             time.sleep(3)
             url = url_path('scope', self.scope_checked.get()) + '/download'
             checked = True
-            self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface1\\hud\\scope')
+            self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface\\hud\\scope')
 
         if not checked:
             self.progress_text['text'] = '스킨을 선택해주세요. (선택 안되어있음)'
