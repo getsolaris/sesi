@@ -14,6 +14,7 @@ import threading
 from tqdm import tqdm
 
 VERSION = '0.1'
+STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 
 def unzip(source_file, dest_path):
     with zipfile.ZipFile(source_file, 'r') as zf:
@@ -35,14 +36,14 @@ def url_path(section, value):
     value -= 1
     if section == 'map_supply':
         # default, white, victor, shadow_remove, W-skin
-        supplys = ['Gb86nPaGdkgnMBT', 'YP7WmfzNC4Zb7g8', '3XePbbg8ePbBaqZ', 'cbf6o4PJ24HXTim', 'coKqpJ4GDBDqFdC']
+        supplys = ['oFSA4KKC9oSn9wH', 'ke2eTQSjmXWrq8t', 'sGbDLSWboM9aLGF', '7dKpcLTsgpyGTQ8', 'oFSA4KKC9oSn9wH']
         return supplys[value]
     elif section == 'weapon_flu':
-        weapon_flus = ['BEofT6qfotczGEr']
+        weapon_flus = ['idS4mZN2HefApxE']
         return weapon_flus[value]
     elif section == 'scope':
         # default, rainbow, black_dragon, full
-        scopes = ['iwtdCtg5cLpdAE4', 'YHofryk7NAX6HJf', 'biKoLnBTL9dmfdw', 'itC8tSF92TqSzFX']
+        scopes = ['BXsNa7MYswGKoD6', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
         return scopes[value]
 
 class Application(tk.Frame):
@@ -238,9 +239,8 @@ class Application(tk.Frame):
 
 
     def download_process(self, section, url, download_path, target):
-        url = 'https://box.team-crescendo.me/cloud/index.php/s/' + url
+        url = STORAGE_URL + url
         self.progress_text['text'] = section + ' 스킨 다운로드를 시작합니다.'
-
         time.sleep(1)
 
         response = requests.get(url, stream=True)
