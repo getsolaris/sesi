@@ -43,7 +43,7 @@ def url_path(section, value):
         return weapon_flus[value]
     elif section == 'scope':
         # default, rainbow, black_dragon, full
-        scopes = ['BXsNa7MYswGKoD6', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
+        scopes = ['HMLrdBGn8JPZdd9', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
         return scopes[value]
 
 class Application(tk.Frame):
