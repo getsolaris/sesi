@@ -12,13 +12,13 @@ import configparser
 import time
 import threading
 from tqdm import tqdm
-import re
-import feedparser
 import webbrowser
 
-VERSION = '0.0.3'
-VERSIONS = []
-RSS_URL = 'http://blog.rss.naver.com/saskinio'
+# module
+import version_crawler as vc
+
+# constant
+VERSION = '0.0.2'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 
 def unzip(source_file, dest_path):
@@ -48,17 +48,8 @@ def url_path(section, value):
         return weapon_flus[value]
     elif section == 'scope':
         # default, rainbow, black_dragon, full
-        scopes = ['HMLrdBGn8JPZdd9', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
+        scopes = ['QYDCAn2BxwNEWrH', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
         return scopes[value]
-
-def release_rss_crawl():
-    content = feedparser.parse(RSS_URL)
-
-    for feed in content.entries:
-        if feed.category == '릴리즈':
-            VERSIONS.append([re.sub('[^0-9.]', '', feed.title).strip(), feed.link])
-
-    return VERSION == VERSIONS[0][0]
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -85,15 +76,16 @@ class Application(tk.Frame):
                 self.progress_text['text'] = 'saskin.cfg 파일에서 서든어택 경로를 불러왔습니다.'
 
     def version_updater(self):
-        recency = release_rss_crawl()
-        print('recency', recency)
-        if not recency:
-            message_box = tk.messagebox.askquestion('새로운 버전이 나왔습니다.', '업데이트를 진행하시겠습니까 ?',
+        recency = vc.release_rss_crawl(VERSION)
+        print('version recency: ', recency[0])
+
+        if not recency[0]:
+            message_box = tk.messagebox.askquestion('새로운 버전이 나왔습니다.', '파일 다운로드를 진행하시겠습니까 ?',
                                       icon='warning')
 
             if (message_box == 'yes'):
-                webbrowser.open(VERSIONS[0][1])
-                root.destory()
+                webbrowser.open(recency[1][0][1])
+                root.destroy()
 
     def create_widgets(self):
         self.progress_text_label = tk.Label(root, text='Log >')

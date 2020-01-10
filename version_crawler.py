@@ -1,22 +1,15 @@
-#-*-coding: utf-8 -*-
-
 import re
 import feedparser
 
-VERSION = '0.0.2'
+VERSIONS = []
 RSS_URL = 'http://blog.rss.naver.com/saskinio'
 
-versions = []
-
-def crawl():
+def release_rss_crawl(version):
     content = feedparser.parse(RSS_URL)
 
     for feed in content.entries:
         if feed.category == '릴리즈':
-            versions.append([re.sub('[^0-9.]', '', feed.title).strip(), feed.link])
+            VERSIONS.append([re.sub('[^0-9.]', '', feed.title).strip(), feed.link])
+            break
 
-    return VERSION == versions[0][0]
-
-if __name__ == "__main__":
-    print(crawl())
-    print(versions[0][1])
+    return [version == VERSIONS[0][0], VERSIONS]
