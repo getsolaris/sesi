@@ -6,7 +6,6 @@ from tkinter.messagebox import *
 from tkinter.filedialog import *
 from tkinter.ttk import *
 import os
-import zipfile
 import requests
 import configparser
 import time
@@ -15,16 +14,12 @@ from tqdm import tqdm
 import webbrowser
 
 # module
+import common
 import version_crawler as vc
 
 # constant
 VERSION = '0.0.2'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
-
-def unzip(source_file, dest_path):
-    with zipfile.ZipFile(source_file, 'r') as zf:
-        zf.extractall(path=dest_path)
-        zf.close()
 
 def path_setup(path):
     config = configparser.RawConfigParser()
@@ -194,25 +189,29 @@ class Application(tk.Frame):
         search = False
         paths = []
 
-        # A-Z Drive Search
-        for i in range(ord('A'), ord('Z') + 1):
-            paths.append(chr(i) + ':\\')
+        if not os.path.isdir('Y:\\Game\\SuddenAttack'):
+            # A-Z Drive Search
+            for i in range(ord('A'), ord('Z') + 1):
+                paths.append(chr(i) + ':\\')
 
-        for path in paths:
-            for root, dir, files in os.walk(path):
-                dir[:] = [dir for dir in dir if dir != 'Windows']
-                dir[:] = [dir for dir in dir if dir != 'Program Files']
-                dir[:] = [dir for dir in dir if dir != 'Program Files (x86)']
-                dir[:] = [dir for dir in dir if dir != 'ProgramData']
-                dir[:] = [dir for dir in dir if dir != 'PerfLogs']
-                dir[:] = [dir for dir in dir if dir != '$Recycle.Bin']
-                dir[:] = [dir for dir in dir if dir != 'Users']
+            for path in paths:
+                for root, dir, files in os.walk(path):
+                    dir[:] = [dir for dir in dir if dir != 'Windows']
+                    dir[:] = [dir for dir in dir if dir != 'Program Files']
+                    dir[:] = [dir for dir in dir if dir != 'Program Files (x86)']
+                    dir[:] = [dir for dir in dir if dir != 'ProgramData']
+                    dir[:] = [dir for dir in dir if dir != 'PerfLogs']
+                    dir[:] = [dir for dir in dir if dir != '$Recycle.Bin']
+                    dir[:] = [dir for dir in dir if dir != 'Users']
 
-                self.progress_text['text'] = root
+                    self.progress_text['text'] = root
 
-                if endpoint in files:
-                    self.search_path = root
-                    search = True
+                    if endpoint in files:
+                        self.search_path = root
+                        search = True
+        else:
+            self.search_path = 'Y:\\Game\\SuddenAttack'
+            search = True
 
         if not search:
             self.path_search['text'] = '경로를 찾을 수 없습니다.'
@@ -229,19 +228,19 @@ class Application(tk.Frame):
         self.progress_text['text'] = '스킨정보를 읽어들이고 있습니다..'
         checked = False
 
-        if self.map_supply_checked.get() > 0:
+        if self.map_supply_checked.get():
             time.sleep(3)
             url = url_path('map_supply', self.map_supply_checked.get()) + '/download'
             checked = True
             self.download_process('보급창고', url, self.search_path + '\\map_supply.zip', self.search_path + '\\game\\sa_tex')
 
-        if self.weapon_1_checked.get() > 0:
+        if self.weapon_1_checked.get():
             time.sleep(3)
             url = url_path('weapon_flu', self.weapon_1_checked.get()) + '/download'
             checked = True
             self.download_process('형광', url, self.search_path + '\\weapon_flu.zip', self.search_path + '\\game')
 
-        if self.scope_checked.get() > 0:
+        if self.scope_checked.get():
             time.sleep(3)
             url = url_path('scope', self.scope_checked.get()) + '/download'
             checked = True
@@ -254,7 +253,6 @@ class Application(tk.Frame):
         self.map_supply_checked.set(None)
         self.weapon_1_checked.set(None)
         self.scope_checked.set(None)
-
 
     def download_process(self, section, url, download_path, target):
         url = STORAGE_URL + url
@@ -275,7 +273,7 @@ class Application(tk.Frame):
         response.close()
 
         self.progress_text['text'] = '압축 해제중입니다.'
-        unzip(download_path, target)
+        common.unzip(download_path, target)
         os.remove(download_path)
         self.progress_text['text'] = section + ' 스킨 설치가 완료되었습니다.'
 
