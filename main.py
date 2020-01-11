@@ -82,6 +82,17 @@ class Application(tk.Frame):
                 webbrowser.open(recency[1][0][1])
                 root.destroy()
 
+    def create_frame(self, title):
+        self.sub_frame = tk.Toplevel()
+        self.sub_frame.geometry('500x300+0+50')
+        self.sub_frame.title(title)
+
+    def help_sa_path_search(self):
+        self.create_frame('서든어택 경로 탐색 안내')
+        self.context = tk.Label(self.sub_frame, text='메인화면의 \'경로 자동검색\' 버튼을 클릭하시면' + "\n" 
+                                                     'A~Z 드라이브를 탐색하여 서든어택 exe 파일을 검색합니다.')
+        self.context.pack()
+
     def create_widgets(self):
         self.progress_text_label = tk.Label(root, text='Log >')
         self.progress_text_label.place(x=13, y=290)
@@ -91,8 +102,9 @@ class Application(tk.Frame):
 
         self.menubar = tk.Menu(root)
         self.help_menu = tk.Menu(self.menubar, tearoff=0)
-        self.help_menu.add_command(label='서든어택 경로 탐색')
+        self.help_menu.add_command(label='서든어택 경로 탐색', command=self.help_sa_path_search)
         self.help_menu.add_command(label='업데이트 로그')
+        self.help_menu.add_command(label='제작자')
         self.account_menu = tk.Menu(self.menubar, tearoff=0)
         self.account_menu.add_command(label='로그인')
         self.account_menu.add_command(label='회원가입')
@@ -250,9 +262,9 @@ class Application(tk.Frame):
             self.progress_text['text'] = '스킨을 선택해주세요. (선택 안되어있음)'
             return
 
-        self.map_supply_checked.set(None)
-        self.weapon_1_checked.set(None)
-        self.scope_checked.set(None)
+        self.map_supply_checked.set(0)
+        self.weapon_1_checked.set(0)
+        self.scope_checked.set(0)
 
     def download_process(self, section, url, download_path, target):
         url = STORAGE_URL + url
