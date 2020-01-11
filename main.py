@@ -20,6 +20,7 @@ import version_crawler as vc
 # constant
 VERSION = '0.0.2'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
+SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 
 def path_setup(path):
     config = configparser.RawConfigParser()
@@ -193,15 +194,24 @@ class Application(tk.Frame):
         self.scope_tab_chkbtn4.pack(side='left', anchor='nw')
 
     def thread_path_search(self):
-        threading.Thread(target=self.path_test).start()
+        threading.Thread(target=self.search_path).start()
 
-    def path_test(self):
-        # suddenattack process name
-        endpoint = 'ghsalncr.exe'
+    def search_path(self):
         search = False
-        paths = []
+        expect = False
+        expect_paths = ['C:\\Nexon\\SuddenAttack', 'D:\\Nexon\\SuddenAttack'
+                        'C:\\Game\\SuddenAttack', 'D:\\Game\\SuddenAttack', 'Y:\\Game\\SuddenAttack']
 
-        if not os.path.isdir('Y:\\Game\\SuddenAttack'):
+        for path in expect_paths:
+            if os.path.isdir(path):
+                expect = True
+                search = True
+                self.search_path = path
+                break
+
+        if not expect:
+            paths = []
+
             # A-Z Drive Search
             for i in range(ord('A'), ord('Z') + 1):
                 paths.append(chr(i) + ':\\')
@@ -218,7 +228,7 @@ class Application(tk.Frame):
 
                     self.progress_text['text'] = root
 
-                    if endpoint in files:
+                    if SUDDENATTACK_PROCESS in files:
                         self.search_path = root
                         search = True
         else:
