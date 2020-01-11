@@ -5,6 +5,7 @@ from tkinter import filedialog
 from tkinter.messagebox import *
 from tkinter.filedialog import *
 from tkinter.ttk import *
+import tkinter.font
 import os
 import requests
 import configparser
@@ -18,7 +19,7 @@ import common
 import version_crawler as vc
 
 # constant
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 
@@ -94,6 +95,22 @@ class Application(tk.Frame):
                                                      'A~Z 드라이브를 탐색하여 서든어택 exe 파일을 검색합니다.')
         self.context.pack()
 
+    def help_update_log(self):
+        self.create_frame('업데이트 로그')
+
+        releases = vc.version_content()
+
+        version_style = tkinter.font.Font(size=15)
+        for release in releases:
+            self.version = tk.Label(self.sub_frame, text='v' + release[0], font=version_style)
+            self.version.pack(anchor='w')
+
+            self.content = tk.Label(self.sub_frame, text=release[1])
+            self.content.pack(anchor='w')
+
+    def help_develop(self):
+        tk.messagebox.showinfo('제작자', '피시방에서 서든을 주로 하는 연구원이 만듬\n문의: saskinio@naver.com')
+
     def create_widgets(self):
         self.progress_text_label = tk.Label(root, text='Log >')
         self.progress_text_label.place(x=13, y=290)
@@ -104,8 +121,8 @@ class Application(tk.Frame):
         self.menubar = tk.Menu(root)
         self.help_menu = tk.Menu(self.menubar, tearoff=0)
         self.help_menu.add_command(label='서든어택 경로 탐색', command=self.help_sa_path_search)
-        self.help_menu.add_command(label='업데이트 로그')
-        self.help_menu.add_command(label='제작자')
+        self.help_menu.add_command(label='업데이트 로그', command=self.help_update_log)
+        self.help_menu.add_command(label='제작자', command=self.help_develop)
         self.account_menu = tk.Menu(self.menubar, tearoff=0)
         self.account_menu.add_command(label='로그인')
         self.account_menu.add_command(label='회원가입')
