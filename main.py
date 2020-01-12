@@ -1,52 +1,23 @@
 #-*-coding: utf-8 -*-
 
+# librarys
+import os, time, tqdm, requests, threading, webbrowser, configparser
+
+# tkinter
 import tkinter as tk
-from tkinter import filedialog
-from tkinter.messagebox import *
-from tkinter.filedialog import *
-from tkinter.ttk import *
 import tkinter.font
-import os
-import requests
-import configparser
-import time
-import threading
-from tqdm import tqdm
-import webbrowser
+from tkinter import filedialog
+from tkinter.ttk import *
+from tkinter.filedialog import *
+from tkinter.messagebox import *
 
 # module
-import common
-import version_crawler as vc
+import path, common, version_crawler as vc
 
 # constant
 VERSION = '0.0.4'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
-
-def path_setup(path):
-    config = configparser.RawConfigParser()
-    if not path:
-        config.add_section('SuddenAttack')
-        config.set('SuddenAttack', 'PATH', None)
-    else:
-        config.read('saskin.cfg')
-        config['SuddenAttack']['PATH'] = path
-
-    config.write(open('saskin.cfg', 'w'))
-
-def url_path(section, value):
-    value -= 1
-    if section == 'map_supply':
-        # default, white, victor, shadow_remove, W-skin
-        supplys = ['oFSA4KKC9oSn9wH', 'ke2eTQSjmXWrq8t', 'sGbDLSWboM9aLGF', '7dKpcLTsgpyGTQ8', 'oFSA4KKC9oSn9wH']
-        return supplys[value]
-    elif section == 'weapon_flu':
-        weapon_flus = ['idS4mZN2HefApxE']
-        return weapon_flus[value]
-    elif section == 'scope':
-        # default, rainbow, black_dragon, full
-        scopes = ['QYDCAn2BxwNEWrH', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
-        return scopes[value]
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -58,7 +29,7 @@ class Application(tk.Frame):
         self.version_updater()
 
         if not os.path.exists('saskin.cfg'):
-            path_setup(None)
+            path.setup(None)
         else:
             config = configparser.RawConfigParser()
             config.read('saskin.cfg')
@@ -259,7 +230,7 @@ class Application(tk.Frame):
             self.install['state'] = 'normal'
             self.path_search['text'] = self.search_path
             self.progress_text['text'] = '서든어택 경로를 찾았습니다.'
-            path_setup(self.search_path)
+            path.setup(self.search_path)
 
     def thread_install(self):
         threading.Thread(target=self.download).start()
@@ -270,17 +241,17 @@ class Application(tk.Frame):
         time.sleep(3)
 
         if self.map_supply_checked.get():
-            url = url_path('map_supply', self.map_supply_checked.get()) + '/download'
+            url = path.download('map_supply', self.map_supply_checked.get()) + '/download'
             checked = True
             self.download_process('보급창고', url, self.search_path + '\\map_supply.zip', self.search_path + '\\game\\sa_tex')
 
         if self.weapon_1_checked.get():
-            url = url_path('weapon_flu', self.weapon_1_checked.get()) + '/download'
+            url = path.download('weapon_flu', self.weapon_1_checked.get()) + '/download'
             checked = True
             self.download_process('형광', url, self.search_path + '\\weapon_flu.zip', self.search_path + '\\game')
 
         if self.scope_checked.get():
-            url = url_path('scope', self.scope_checked.get()) + '/download'
+            url = path.download('scope', self.scope_checked.get()) + '/download'
             checked = True
             self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface\\hud\\scope')
 
@@ -321,7 +292,7 @@ class Application(tk.Frame):
         self.search_path = self.dir
         self.path_search['text'] = self.dir
         self.progress_text['text'] = '서든어택 경로를 불러왔습니다.'
-        path_setup(self.dir)
+        path.setup(self.dir)
 
 if __name__ == "__main__":
     root = tk.Tk()
