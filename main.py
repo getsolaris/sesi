@@ -19,7 +19,7 @@ import common
 import version_crawler as vc
 
 # constant
-VERSION = '0.0.3'
+VERSION = '0.0.4'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 
@@ -100,12 +100,12 @@ class Application(tk.Frame):
 
         releases = vc.version_content()
 
-        version_style = tkinter.font.Font(size=15)
+        version_style = tkinter.font.Font(size=14, weight='bold')
         for release in releases:
-            self.version = tk.Label(self.sub_frame, text='v' + release[0], font=version_style)
+            self.version = tk.Label(self.sub_frame, text='v' + release[0], justify='left', font=version_style)
             self.version.pack(anchor='w')
 
-            self.content = tk.Label(self.sub_frame, text=release[1])
+            self.content = tk.Label(self.sub_frame, text=release[1] + '\n', justify='left')
             self.content.pack(anchor='w')
 
     def help_develop(self):
@@ -216,8 +216,12 @@ class Application(tk.Frame):
     def search_path(self):
         search = False
         expect = False
-        expect_paths = ['C:\\Nexon\\SuddenAttack', 'D:\\Nexon\\SuddenAttack'
-                        'C:\\Game\\SuddenAttack', 'D:\\Game\\SuddenAttack', 'Y:\\Game\\SuddenAttack']
+        expect_paths = []
+
+        for i in range(ord('C'), ord('Z') + 1):
+            expect_paths.append(chr(i) + ':\\Nexon\\SuddenAttack')
+            expect_paths.append(chr(i) + ':\\Game\\SuddenAttack')
+            expect_paths.append(chr(i) + ':\\Game\\Nexon\\SuddenAttack')
 
         for path in expect_paths:
             if os.path.isdir(path):
@@ -230,7 +234,7 @@ class Application(tk.Frame):
             paths = []
 
             # A-Z Drive Search
-            for i in range(ord('A'), ord('Z') + 1):
+            for i in range(ord('C'), ord('Z') + 1):
                 paths.append(chr(i) + ':\\')
 
             for path in paths:
@@ -248,9 +252,6 @@ class Application(tk.Frame):
                     if SUDDENATTACK_PROCESS in files:
                         self.search_path = root
                         search = True
-        else:
-            self.search_path = 'Y:\\Game\\SuddenAttack'
-            search = True
 
         if not search:
             self.path_search['text'] = '경로를 찾을 수 없습니다.'
@@ -266,21 +267,19 @@ class Application(tk.Frame):
     def download(self):
         self.progress_text['text'] = '스킨정보를 읽어들이고 있습니다..'
         checked = False
+        time.sleep(3)
 
         if self.map_supply_checked.get():
-            time.sleep(3)
             url = url_path('map_supply', self.map_supply_checked.get()) + '/download'
             checked = True
             self.download_process('보급창고', url, self.search_path + '\\map_supply.zip', self.search_path + '\\game\\sa_tex')
 
         if self.weapon_1_checked.get():
-            time.sleep(3)
             url = url_path('weapon_flu', self.weapon_1_checked.get()) + '/download'
             checked = True
             self.download_process('형광', url, self.search_path + '\\weapon_flu.zip', self.search_path + '\\game')
 
         if self.scope_checked.get():
-            time.sleep(3)
             url = url_path('scope', self.scope_checked.get()) + '/download'
             checked = True
             self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface\\hud\\scope')

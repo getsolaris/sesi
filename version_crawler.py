@@ -20,7 +20,8 @@ def version_content():
 
     for feed in content.entries:
         if feed.category == '릴리즈':
-            summary = feed.summary.replace('*', '\n')
+            summary = feed.summary.replace('업데이트 내역', '')
+            summary = summary.replace('*', '\n')
 
             releases.append([
                 re.sub('[^0-9.]', '', feed.title).strip(),
