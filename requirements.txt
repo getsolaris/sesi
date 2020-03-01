@@ -1,0 +1,14 @@
+altgraph==0.16.1
+beautifulsoup4==4.8.2
+certifi==2019.11.28
+chardet==3.0.4
+feedparser==5.2.1
+future==0.18.2
+idna==2.8
+pefile==2019.4.18
+PyInstaller==4.0.dev0+a97628fba9
+pywin32-ctypes==0.2.0
+requests==2.22.0
+soupsieve==1.9.5
+tqdm==4.41.1
+urllib3==1.25.7
