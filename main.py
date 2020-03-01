@@ -90,7 +90,7 @@ class Application(tk.Frame):
 
     def create_widgets(self):
         self.progress_text_label = ttk.Label(root, text='Log >')
-        self.progress_text_label.place(x=13, y=294)
+        self.progress_text_label.place(x=13, y=292.5)
 
         self.progress_text = ttk.Label(root, text='')
         self.progress_text.place(x=50, y=294)
@@ -337,10 +337,10 @@ class Application(tk.Frame):
 if __name__ == "__main__":
     root = tk.Tk()
     root.title('SuddenAttack Easy Skin Installer v' + VERSION)
-    root.geometry('500x300+0+50')
+    root.geometry('500x336+0+50')
     root.resizable(False, False)
-    root.maxsize(width=500, height=320)
-    root.minsize(width=500, height=320)
+    root.maxsize(width=500, height=336)
+    root.minsize(width=500, height=336)
     root.configure(background=BACKGROUND_COLOR)
     root.iconbitmap(common.resource_path('saskinio.ico'))
     app = Application(master=root)
