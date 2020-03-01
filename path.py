@@ -9,6 +9,12 @@ FLU = ['idS4mZN2HefApxE']
 # SCOPE: default, rainbow, black_dragon, full
 SCOPES = ['QYDCAn2BxwNEWrH', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
 
+# DRAGON: default, shadow_remove
+DRAGONS = ['83TbHkXSL3jY2wp', 'oQp8TYp7FAdfjkj']
+
+# DUOS: default, white
+DUOS = ['7qSn5PSJzE76iR9', 'N4c8cKgcRQDXTmL']
+
 def download(section, value):
     value -= 1
 
@@ -16,6 +22,10 @@ def download(section, value):
         return SUPPLYS[value]
     elif section == 'weapon_flu':
         return FLU[value]
+    elif section == 'map_dragon':
+        return DRAGONS[value]
+    elif section == 'map_duo':
+        return DUOS[value]
     elif section == 'scope':
         return SCOPES[value]
 

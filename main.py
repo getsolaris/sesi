@@ -15,7 +15,7 @@ from tkinter.messagebox import *
 import path, common, version_crawler as vc
 
 # constant
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 
@@ -136,11 +136,13 @@ class Application(tk.Frame):
 
         # ----------------------- Radio Button Setup tkinter
         self.map_supply_checked = tk.IntVar()
+        self.map_dragon_checked = tk.IntVar()
+        self.map_duo_checked = tk.IntVar()
         self.weapon_1_checked = tk.IntVar()
         self.scope_checked = tk.IntVar()
 
         # ----------------------- Map
-        self.map_supply_group = LabelFrame(self.map_tab, text='Supply Base', width=200, height=4)
+        self.map_supply_group = LabelFrame(self.map_tab, text='보급창고', width=200, height=4)
         self.map_supply_group.place(x=8, y=5)
         self.map_tab_chkbtn1 = tk.Radiobutton(self.map_supply_group, text='원본', value=1,
                                               variable=self.map_supply_checked)
@@ -157,6 +159,24 @@ class Application(tk.Frame):
         self.map_tab_chkbtn5 = tk.Radiobutton(self.map_supply_group, text='W스킨', value=5,
                                               variable=self.map_supply_checked)
         self.map_tab_chkbtn5.pack(side='left', anchor='nw')
+        
+        self.map_dragon_group = LabelFrame(self.map_tab, text='드래곤로드', width=200, height=4)
+        self.map_dragon_group.place(x=8, y=50)
+        self.map_tab_chkbtn1 = tk.Radiobutton(self.map_dragon_group, text='원본', value=1,
+                                              variable=self.map_dragon_checked)
+        self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn2 = tk.Radiobutton(self.map_dragon_group, text='그림자제거', value=2,
+                                              variable=self.map_dragon_checked)
+        self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        self.map_duo_group = LabelFrame(self.map_tab, text='듀오', width=200, height=4)
+        self.map_duo_group.place(x=160, y=50)
+        self.map_tab_chkbtn1 = tk.Radiobutton(self.map_duo_group, text='원본', value=1,
+                                              variable=self.map_duo_checked)
+        self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn2 = tk.Radiobutton(self.map_duo_group, text='화이트 스킨', value=2,
+                                              variable=self.map_duo_checked)
+        self.map_tab_chkbtn2.pack(side='left', anchor='nw')
 
         # ----------------------- Weapon
         self.weapon_group1 = LabelFrame(self.weapon_tab, text='Weapon 1', width=200, height=4)
@@ -245,6 +265,18 @@ class Application(tk.Frame):
             checked = True
             self.download_process('보급창고', url, self.search_path + '\\map_supply.zip', self.search_path + '\\game\\sa_tex')
 
+        if self.map_dragon_checked.get():
+            url = path.download('map_dragon', self.map_dragon_checked.get()) + '/download'
+            checked = True
+            self.download_process('드래곤로드', url, self.search_path + '\\map_dragon.zip',
+                                  self.search_path + '\\game\\sa_tex\\hongkong')
+
+        if self.map_duo_checked.get():
+            url = path.download('map_duo', self.map_duo_checked.get()) + '/download'
+            checked = True
+            self.download_process('듀오', url, self.search_path + '\\map_duo.zip',
+                                  self.search_path + '\\game\\sa_tex2014\\slumdog')
+
         if self.weapon_1_checked.get():
             url = path.download('weapon_flu', self.weapon_1_checked.get()) + '/download'
             checked = True
@@ -271,7 +303,7 @@ class Application(tk.Frame):
         response = requests.get(url, stream=True)
         total_size = int(response.headers.get('content-length', 0))
         block_size = 1024
-        t = tqdm(total=total_size, unit='iB', unit_scale=True)
+        t = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
         with open(download_path, 'wb') as f:
             for data in response.iter_content(block_size):
                 self.progress_text['text'] = t
