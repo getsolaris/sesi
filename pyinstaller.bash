@@ -1,0 +1,1 @@
+pyinstaller --onefile --windowed --icon=saskinio.ico main.py

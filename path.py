@@ -4,7 +4,7 @@ import configparser
 SUPPLYS = ['oFSA4KKC9oSn9wH', 'ke2eTQSjmXWrq8t', 'sGbDLSWboM9aLGF', '7dKpcLTsgpyGTQ8', 'oFSA4KKC9oSn9wH']
 
 # WEAPON_FLU
-FLU = ['idS4mZN2HefApxE']
+FLU = ['KNx5sfYfzfFfXmQ']
 
 # SCOPE: default, rainbow, black_dragon, full
 SCOPES = ['QYDCAn2BxwNEWrH', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']

@@ -5,11 +5,13 @@ import os, time, tqdm, requests, threading, webbrowser, configparser
 
 # tkinter
 import tkinter as tk
+import tkinter.ttk as ttk
 import tkinter.font
 from tkinter import filedialog
 from tkinter.ttk import *
 from tkinter.filedialog import *
 from tkinter.messagebox import *
+from ttkthemes import ThemedStyle
 
 # module
 import path, common, version_crawler as vc
@@ -18,11 +20,15 @@ import path, common, version_crawler as vc
 VERSION = '0.0.5'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
+BACKGROUND_COLOR = '#F5F6F8'
 
 class Application(tk.Frame):
     def __init__(self, master=None):
         print('======================= Running')
         super().__init__(master)
+        style = ThemedStyle(master)
+        style.set_theme('arc')
+        style.theme_use('arc')
         self.master = master
         self.pack()
         self.create_widgets()
@@ -55,39 +61,39 @@ class Application(tk.Frame):
                 webbrowser.open(recency[1][0][1])
                 root.destroy()
 
-    def create_frame(self, title):
+    def create_frame(self, title, size):
         self.sub_frame = tk.Toplevel()
-        self.sub_frame.geometry('500x300+0+50')
+        self.sub_frame.geometry(size + '+0+50')
         self.sub_frame.title(title)
+        self.sub_frame.resizable(False, False)
+        self.sub_frame.configure(background=BACKGROUND_COLOR)
 
     def help_sa_path_search(self):
-        self.create_frame('서든어택 경로 탐색 안내')
-        self.context = tk.Label(self.sub_frame, text='메인화면의 \'경로 자동검색\' 버튼을 클릭하시면' + "\n" 
-                                                     'A~Z 드라이브를 탐색하여 서든어택 exe 파일을 검색합니다.')
-        self.context.pack()
+        tk.messagebox.showinfo('서든어택 경로 탐색', '메인화면의 \'경로 자동검색\' 버튼을 클릭하시면' + "\n" 
+                                                     'A~Z 드라이브를 탐색하여 서든어택 경로를 자동 검색합니다.')
 
     def help_update_log(self):
-        self.create_frame('업데이트 로그')
+        self.create_frame('업데이트 로그', '500x300')
 
         releases = vc.version_content()
 
         version_style = tkinter.font.Font(size=14, weight='bold')
         for release in releases:
-            self.version = tk.Label(self.sub_frame, text='v' + release[0], justify='left', font=version_style)
+            self.version = ttk.Label(self.sub_frame, text='v' + release[0], justify='left', font=version_style)
             self.version.pack(anchor='w')
 
-            self.content = tk.Label(self.sub_frame, text=release[1] + '\n', justify='left')
+            self.content = ttk.Label(self.sub_frame, text=release[1] + '\n', justify='left')
             self.content.pack(anchor='w')
 
     def help_develop(self):
         tk.messagebox.showinfo('제작자', '피시방에서 서든을 주로 하는 연구원이 만듬\n문의: saskinio@naver.com')
 
     def create_widgets(self):
-        self.progress_text_label = tk.Label(root, text='Log >')
-        self.progress_text_label.place(x=13, y=290)
+        self.progress_text_label = ttk.Label(root, text='Log >')
+        self.progress_text_label.place(x=13, y=294)
 
-        self.progress_text = tk.Label(root, text='')
-        self.progress_text.place(x=50, y=290)
+        self.progress_text = ttk.Label(root, text='')
+        self.progress_text.place(x=50, y=294)
 
         self.menubar = tk.Menu(root)
         self.help_menu = tk.Menu(self.menubar, tearoff=0)
@@ -104,34 +110,34 @@ class Application(tk.Frame):
         self.menubar.add_cascade(label='Help', menu=self.help_menu)
         root.config(menu=self.menubar)
 
-        self.path = tk.Button(root, text='경로 자동검색', command=self.thread_path_search)
+        self.path = ttk.Button(root, text='경로 자동검색', command=self.thread_path_search)
         self.path.place(x=10, y=10)
 
-        self.path_search_label = tk.Label(root, text='\'경로 자동검색\' 버튼을 클릭하면 서든어택 경로를 자동으로 탐색합니다.')
-        self.path_search_label.place(x=10, y=36)
+        self.path_search_label = ttk.Label(root, text='\'경로 자동검색\' 버튼을 클릭하면 서든어택 경로를 자동으로 탐색합니다.')
+        self.path_search_label.place(x=10, y=40)
 
-        self.path_search = tk.Label(root, text='경로')
-        self.path_search.place(x=140, y=13)
+        self.path_search = ttk.Label(root, text='경로')
+        self.path_search.place(x=165, y=16.4)
 
-        self.dir_search = tk.Button(root, text='검색', command=self.self_dir_search)
-        self.dir_search.place(x=100, y=10)
+        self.dir_search = ttk.Button(root, text='검색', command=self.self_dir_search, width=4)
+        self.dir_search.place(x=111, y=10)
 
-        self.install = tk.Button(root, text='설치', command=self.thread_install)
-        self.install.place(x=455, y=10)
+        self.install = ttk.Button(root, text='설치', command=self.thread_install, width=4)
+        self.install.place(x=437, y=10)
 
-        self.note = Notebook(root)
-        self.map_tab = Frame(self.note, width=480, height=200)
-        self.weapon_tab = Frame(self.note, width=480, height=200)
-        self.scope_tab = Frame(self.note, width=480, height=200)
-        self.ui_tab = Frame(self.note, width=480, height=200)
-        self.win_lose_tab = Frame(self.note, width=480, height=200)
-        self.my_files = Frame(self.note, width=480, height=200)
+        self.note = ttk.Notebook(root)
+        self.map_tab = ttk.Frame(self.note, width=480, height=200)
+        self.weapon_tab = ttk.Frame(self.note, width=480, height=200)
+        self.scope_tab = ttk.Frame(self.note, width=480, height=200)
+        self.ui_tab = ttk.Frame(self.note, width=480, height=200)
+        self.win_lose_tab = ttk.Frame(self.note, width=480, height=200)
+        self.my_files = ttk.Frame(self.note, width=480, height=200)
         self.note.add(self.map_tab, text="Maps")
         self.note.add(self.weapon_tab, text="Weapons")
         self.note.add(self.scope_tab, text="Scope")
-        self.note.add(self.ui_tab, text="UI")
-        self.note.add(self.win_lose_tab, text="Win/Lose")
-        self.note.add(self.my_files, text="My Files")
+        # self.note.add(self.ui_tab, text="UI")
+        # self.note.add(self.win_lose_tab, text="Win/Lose")
+        # self.note.add(self.my_files, text="My Files")
         self.note.place(x=10, y=60)
 
         # ----------------------- Radio Button Setup tkinter
@@ -142,62 +148,62 @@ class Application(tk.Frame):
         self.scope_checked = tk.IntVar()
 
         # ----------------------- Map
-        self.map_supply_group = LabelFrame(self.map_tab, text='보급창고', width=200, height=4)
+        self.map_supply_group = ttk.Labelframe(self.map_tab, text='보급창고', width=200, height=4)
         self.map_supply_group.place(x=8, y=5)
-        self.map_tab_chkbtn1 = tk.Radiobutton(self.map_supply_group, text='원본', value=1,
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_supply_group, text='원본', value=1,
                                               variable=self.map_supply_checked)
         self.map_tab_chkbtn1.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn2 = tk.Radiobutton(self.map_supply_group, text='화이트 스킨', value=2,
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_supply_group, text='화이트 스킨', value=2,
                                               variable=self.map_supply_checked)
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn3 = tk.Radiobutton(self.map_supply_group, text='하이터빅터', value=3,
+        self.map_tab_chkbtn3 = ttk.Radiobutton(self.map_supply_group, text='하이터빅터', value=3,
                                               variable=self.map_supply_checked)
         self.map_tab_chkbtn3.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn4 = tk.Radiobutton(self.map_supply_group, text='그림자제거', value=4,
+        self.map_tab_chkbtn4 = ttk.Radiobutton(self.map_supply_group, text='그림자제거', value=4,
                                               variable=self.map_supply_checked)
         self.map_tab_chkbtn4.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn5 = tk.Radiobutton(self.map_supply_group, text='W스킨', value=5,
+        self.map_tab_chkbtn5 = ttk.Radiobutton(self.map_supply_group, text='W스킨', value=5,
                                               variable=self.map_supply_checked)
         self.map_tab_chkbtn5.pack(side='left', anchor='nw')
         
-        self.map_dragon_group = LabelFrame(self.map_tab, text='드래곤로드', width=200, height=4)
+        self.map_dragon_group = ttk.LabelFrame(self.map_tab, text='드래곤로드', width=200, height=4)
         self.map_dragon_group.place(x=8, y=50)
-        self.map_tab_chkbtn1 = tk.Radiobutton(self.map_dragon_group, text='원본', value=1,
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_dragon_group, text='원본', value=1,
                                               variable=self.map_dragon_checked)
         self.map_tab_chkbtn1.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn2 = tk.Radiobutton(self.map_dragon_group, text='그림자제거', value=2,
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_dragon_group, text='그림자제거', value=2,
                                               variable=self.map_dragon_checked)
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
 
-        self.map_duo_group = LabelFrame(self.map_tab, text='듀오', width=200, height=4)
+        self.map_duo_group = ttk.LabelFrame(self.map_tab, text='듀오', width=200, height=4)
         self.map_duo_group.place(x=160, y=50)
-        self.map_tab_chkbtn1 = tk.Radiobutton(self.map_duo_group, text='원본', value=1,
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_duo_group, text='원본', value=1,
                                               variable=self.map_duo_checked)
         self.map_tab_chkbtn1.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn2 = tk.Radiobutton(self.map_duo_group, text='화이트 스킨', value=2,
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_duo_group, text='화이트 스킨', value=2,
                                               variable=self.map_duo_checked)
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
 
         # ----------------------- Weapon
-        self.weapon_group1 = LabelFrame(self.weapon_tab, text='Weapon 1', width=200, height=4)
+        self.weapon_group1 = ttk.LabelFrame(self.weapon_tab, text='Weapon 1', width=200, height=4)
         self.weapon_group1.place(x=8, y=5)
-        self.weapon_tab1_chkbtn1 = tk.Radiobutton(self.weapon_group1, text='형광스킨 (20.01.02)', value=1,
+        self.weapon_tab1_chkbtn1 = ttk.Radiobutton(self.weapon_group1, text='형광스킨 (20.02.20)', value=1,
                                               variable=self.weapon_1_checked)
         self.weapon_tab1_chkbtn1.pack(side='left', anchor='nw')
 
         # ----------------------- Scope
-        self.scope_group = LabelFrame(self.scope_tab, text='Scopes', width=200, height=4)
+        self.scope_group = ttk.LabelFrame(self.scope_tab, text='Scopes', width=200, height=4)
         self.scope_group.place(x=8, y=5)
-        self.scope_tab_chkbtn1 = tk.Radiobutton(self.scope_group, text='원본', value=1,
+        self.scope_tab_chkbtn1 = ttk.Radiobutton(self.scope_group, text='원본', value=1,
                                                   variable=self.scope_checked)
         self.scope_tab_chkbtn1.pack(side='left', anchor='nw')
-        self.scope_tab_chkbtn2 = tk.Radiobutton(self.scope_group, text='무지개', value=2,
+        self.scope_tab_chkbtn2 = ttk.Radiobutton(self.scope_group, text='무지개', value=2,
                                                   variable=self.scope_checked)
         self.scope_tab_chkbtn2.pack(side='left', anchor='nw')
-        self.scope_tab_chkbtn3 = tk.Radiobutton(self.scope_group, text='흑룡', value=3,
+        self.scope_tab_chkbtn3 = ttk.Radiobutton(self.scope_group, text='흑룡', value=3,
                                                   variable=self.scope_checked)
         self.scope_tab_chkbtn3.pack(side='left', anchor='nw')
-        self.scope_tab_chkbtn4 = tk.Radiobutton(self.scope_group, text='전체화면', value=4,
+        self.scope_tab_chkbtn4 = ttk.Radiobutton(self.scope_group, text='전체화면', value=4,
                                                   variable=self.scope_checked)
         self.scope_tab_chkbtn4.pack(side='left', anchor='nw')
 
@@ -292,6 +298,8 @@ class Application(tk.Frame):
             return
 
         self.map_supply_checked.set(0)
+        self.map_dragon_checked.set(0)
+        self.map_duo_checked.set(0)
         self.weapon_1_checked.set(0)
         self.scope_checked.set(0)
 
@@ -333,5 +341,7 @@ if __name__ == "__main__":
     root.resizable(False, False)
     root.maxsize(width=500, height=320)
     root.minsize(width=500, height=320)
+    root.configure(background=BACKGROUND_COLOR)
+    root.iconbitmap(common.resource_path('saskinio.ico'))
     app = Application(master=root)
     app.mainloop()
