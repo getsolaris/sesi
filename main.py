@@ -17,7 +17,7 @@ from ttkthemes import ThemedStyle
 import path, common, version_crawler as vc
 
 # constant
-VERSION = '0.0.5'
+VERSION = '0.0.6'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 BACKGROUND_COLOR = '#F5F6F8'
@@ -342,6 +342,6 @@ if __name__ == "__main__":
     root.maxsize(width=500, height=336)
     root.minsize(width=500, height=336)
     root.configure(background=BACKGROUND_COLOR)
-    root.iconbitmap(common.resource_path('saskinio.ico'))
+    root.iconbitmap(r'C:\Users\kevin\Desktop\sa_skin-master\saskinio.ico')
     app = Application(master=root)
     app.mainloop()
