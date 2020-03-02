@@ -45,6 +45,7 @@ class Application(tk.Frame):
                 self.progress_text['text'] = 'saskin.cfg 파일에서 서든어택 경로를 불러오지 못했습니다.'
                 time.sleep(1)
                 self.progress_text['text'] = '서든어택 경로를 탐색해주세요.'
+                self.install['state'] = 'disabled'
             else:
                 self.search_path = config['SuddenAttack']['PATH']
                 self.path_search['text'] = config['SuddenAttack']['PATH']
@@ -338,12 +339,14 @@ class Application(tk.Frame):
         self.progress_text['text'] = section + ' 스킨 설치가 완료되었습니다.'
 
     def self_dir_search(self):
-        self.dir = filedialog.askdirectory(title='Browse SuddenAttack Folder')
-        self.install['state'] = 'normal'
-        self.search_path = self.dir
-        self.path_search['text'] = self.dir
-        self.progress_text['text'] = '서든어택 경로를 불러왔습니다.'
-        path.setup(self.dir)
+        self.self_dir = filedialog.askdirectory(title='Browse SuddenAttack Folder')
+
+        if self.self_dir:
+            self.install['state'] = 'normal'
+            self.search_path = self.self_dir
+            self.path_search['text'] = self.self_dir
+            self.progress_text['text'] = '서든어택 경로를 불러왔습니다.'
+            path.setup(self.self_dir)
 
 if __name__ == "__main__":
     root = tk.Tk()
