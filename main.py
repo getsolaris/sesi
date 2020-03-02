@@ -72,7 +72,7 @@ class Application(tk.Frame):
 
     def help_sa_path_search(self):
         tk.messagebox.showinfo('서든어택 경로 탐색', '메인화면의 \'경로 자동검색\' 버튼을 클릭하시면' + "\n" 
-                                                     'A~Z 드라이브를 탐색하여 서든어택 경로를 자동 검색합니다.')
+                                                     'A~Z 드라이브를 탐색하여 서든어택 경로를 자동 검색합니다.\n')
 
     def help_update_log(self):
         self.create_frame('업데이트 로그', '500x300')
@@ -88,7 +88,13 @@ class Application(tk.Frame):
             self.content.pack(anchor='w')
 
     def help_develop(self):
-        tk.messagebox.showinfo('제작자', '피시방에서 서든을 주로 하는 연구원이 만듬\n문의: saskinio@naver.com')
+        tk.messagebox.showinfo('제작자', '피시방에서 서든을 주로 하는 개발자가 개발했습니다.\n이메일: saskinio@naver.com')
+
+    def help_opensource(self):
+        tk.messagebox.showinfo('오픈소스 안내', 'SuddenAttack Easy Skin Manager는 오픈소스로 공개 되어있는 프로그램입니다.\n'
+                                          '언어는 Python 으로 개발 되었고, Pyinstaller 로 패키징(.py to .exe) 합니다.\n'
+                                          '개발에 참여 하고 싶으시거나, 궁금하신점이 있으신 사용자분들께서는 아래의 이메일로 연락'
+                                          '주시기 바랍니다.\nsaskinio@naver.com')
 
     def create_widgets(self):
         self.progress_text_label = ttk.Label(root, text='Log >')
@@ -102,11 +108,12 @@ class Application(tk.Frame):
         self.help_menu.add_command(label='서든어택 경로 탐색', command=self.help_sa_path_search)
         self.help_menu.add_command(label='업데이트 로그', command=self.help_update_log)
         self.help_menu.add_command(label='제작자', command=self.help_develop)
+        self.help_menu.add_command(label='오픈소스', command=self.help_opensource)
         self.account_menu = tk.Menu(self.menubar, tearoff=0)
-        self.account_menu.add_command(label='로그인')
-        self.account_menu.add_command(label='회원가입')
+        self.account_menu.add_command(label='로그인 (개발중)', state='disabled')
+        self.account_menu.add_command(label='회원가입 (개발중)', state='disabled')
         self.my_files_menu = tk.Menu(self.menubar, tearoff=0)
-        self.my_files_menu.add_command(label='사용방법')
+        self.my_files_menu.add_command(label='사용방법 (개발중)', state='disabled')
         self.menubar.add_cascade(label='Account', menu=self.account_menu)
         self.menubar.add_cascade(label='My Files', menu=self.my_files_menu)
         self.menubar.add_cascade(label='Help', menu=self.help_menu)
