@@ -117,12 +117,14 @@ class Application(tk.Frame):
 
         self.path_search_label = ttk.Label(root, text='\'경로 자동검색\' 버튼을 클릭하면 서든어택 경로를 자동으로 탐색합니다.')
         self.path_search_label.place(x=10, y=40)
+        common.create_tooltip(self.path, text='서든어택 경로를 자동검색합니다.')
 
-        self.path_search = ttk.Label(root, text='경로')
+        self.path_search = ttk.Label(root, text='')
         self.path_search.place(x=165, y=16.4)
 
         self.dir_search = ttk.Button(root, text='검색', command=self.self_dir_search, width=4)
         self.dir_search.place(x=111, y=10)
+        common.create_tooltip(self.dir_search, text='\'경로 자동검색\' 으로 찾지 못할 경우, 직접 서든어택 경로를 선택해주세요.')
 
         self.install = ttk.Button(root, text='설치', command=self.thread_install, width=4)
         self.install.place(x=437, y=10)
@@ -338,7 +340,7 @@ class Application(tk.Frame):
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title('SuddenAttack Easy Skin Installer v' + VERSION)
+    root.title('SuddenAttack Easy Skin Manager v' + VERSION)
     root.geometry(str(CONTAINER_WIDTH) + 'x' + str(CONTAINER_HEIGHT) + '+0+50')
     root.resizable(False, False)
     root.maxsize(width=CONTAINER_WIDTH, height=CONTAINER_HEIGHT)
