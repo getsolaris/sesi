@@ -14,12 +14,12 @@ from tkinter.messagebox import *
 from ttkthemes import ThemedStyle
 
 # module
-import path, common, version_crawler as vc
+import path as skin, common, version_crawler as vc
 
 # constant
 CONTAINER_WIDTH = 500
 CONTAINER_HEIGHT = 318
-VERSION = '0.0.6'
+VERSION = '0.0.7'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 BACKGROUND_COLOR = '#F5F6F8'
@@ -34,10 +34,13 @@ class Application(tk.Frame):
         self.master = master
         self.pack()
         self.create_widgets()
-        self.version_updater()
+
+        # 개발PC 인 경우 업데이트를 체크하지 않음
+        if os.environ['LOGONSERVER'] != r'\\KEVINCC38':
+            self.version_updater()
 
         if not os.path.exists('saskin.cfg'):
-            path.setup(None)
+            skin.setup(None)
         else:
             config = configparser.RawConfigParser()
             config.read('saskin.cfg')
@@ -268,7 +271,7 @@ class Application(tk.Frame):
             self.install['state'] = 'normal'
             self.path_search['text'] = self.search_path
             self.progress_text['text'] = '서든어택 경로를 찾았습니다.'
-            path.setup(self.search_path)
+            skin.setup(self.search_path)
 
     def thread_install(self):
         threading.Thread(target=self.download).start()
@@ -279,29 +282,29 @@ class Application(tk.Frame):
         time.sleep(3)
 
         if self.map_supply_checked.get():
-            url = path.download('map_supply', self.map_supply_checked.get()) + '/download'
+            url = skin.download('map_supply', self.map_supply_checked.get()) + '/download'
             checked = True
             self.download_process('보급창고', url, self.search_path + '\\map_supply.zip', self.search_path + '\\game\\sa_tex')
 
         if self.map_dragon_checked.get():
-            url = path.download('map_dragon', self.map_dragon_checked.get()) + '/download'
+            url = skin.download('map_dragon', self.map_dragon_checked.get()) + '/download'
             checked = True
             self.download_process('드래곤로드', url, self.search_path + '\\map_dragon.zip',
                                   self.search_path + '\\game\\sa_tex\\hongkong')
 
         if self.map_duo_checked.get():
-            url = path.download('map_duo', self.map_duo_checked.get()) + '/download'
+            url = skin.download('map_duo', self.map_duo_checked.get()) + '/download'
             checked = True
             self.download_process('듀오', url, self.search_path + '\\map_duo.zip',
                                   self.search_path + '\\game\\sa_tex2014\\slumdog')
 
         if self.weapon_1_checked.get():
-            url = path.download('weapon_flu', self.weapon_1_checked.get()) + '/download'
+            url = skin.download('weapon_flu', self.weapon_1_checked.get()) + '/download'
             checked = True
             self.download_process('형광', url, self.search_path + '\\weapon_flu.zip', self.search_path + '\\game')
 
         if self.scope_checked.get():
-            url = path.download('scope', self.scope_checked.get()) + '/download'
+            url = skin.download('scope', self.scope_checked.get()) + '/download'
             checked = True
             self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface\\hud\\scope')
 
@@ -346,7 +349,7 @@ class Application(tk.Frame):
             self.search_path = self.self_dir
             self.path_search['text'] = self.self_dir
             self.progress_text['text'] = '서든어택 경로를 불러왔습니다.'
-            path.setup(self.self_dir)
+            skin.setup(self.self_dir)
 
 if __name__ == "__main__":
     root = tk.Tk()
