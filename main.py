@@ -17,6 +17,8 @@ from ttkthemes import ThemedStyle
 import path, common, version_crawler as vc
 
 # constant
+CONTAINER_WIDTH = 500
+CONTAINER_HEIGHT = 318
 VERSION = '0.0.6'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
@@ -337,11 +339,11 @@ class Application(tk.Frame):
 if __name__ == "__main__":
     root = tk.Tk()
     root.title('SuddenAttack Easy Skin Installer v' + VERSION)
-    root.geometry('500x336+0+50')
+    root.geometry(str(CONTAINER_WIDTH) + 'x' + str(CONTAINER_HEIGHT) + '+0+50')
     root.resizable(False, False)
-    root.maxsize(width=500, height=336)
-    root.minsize(width=500, height=336)
+    root.maxsize(width=CONTAINER_WIDTH, height=CONTAINER_HEIGHT)
+    root.minsize(width=CONTAINER_WIDTH, height=CONTAINER_HEIGHT)
     root.configure(background=BACKGROUND_COLOR)
-    root.iconbitmap(r'C:\Users\kevin\Desktop\sa_skin-master\saskinio.ico')
+    # root.iconbitmap(r'C:\Users\kevin\Desktop\sa_skin-master\saskinio.ico')
     app = Application(master=root)
     app.mainloop()
