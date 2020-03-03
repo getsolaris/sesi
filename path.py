@@ -9,11 +9,29 @@ FLU = ['KNx5sfYfzfFfXmQ']
 # SCOPE: default, rainbow, black_dragon, full
 SCOPES = ['QYDCAn2BxwNEWrH', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
 
-# DRAGON: default, shadow_remove
-DRAGONS = ['83TbHkXSL3jY2wp', 'oQp8TYp7FAdfjkj']
+# DRAGON: default, shadow_remove, white
+DRAGONS = ['83TbHkXSL3jY2wp', 'oQp8TYp7FAdfjkj', '8p34GSjAHmDa5Ca']
 
 # DUOS: default, white
 DUOS = ['7qSn5PSJzE76iR9', 'N4c8cKgcRQDXTmL']
+
+# CROSS COUNTERS: default, renew
+CROSS_COUNTERS = ['dfAeqRdJwH2rHPa', 'EBxgzDMEHPE4PbB']
+
+# CROSS PORTS: default, renew
+CROSS_PORTS = ['X2skLzg6EJoPGKo']
+
+# GOLDEN EYES: default, white
+GOLDEN_EYES = ['JCbYWig46GPy85N', 'C3HrTMtoNR7dKZ9']
+
+# CLUB NIGHT: default, renew
+CLUB_NIGHTS = ['i5WHkiaQe83RMm9']
+
+# PROVENCE: default, renew
+PROVENCES = ['RetX4K4L6ZPbwzG', 'F877tqD4G5yngR3']
+
+# TRIO: default, renew
+TRIOS = ['EtFnjxmR3HgrsrC', 'DGnJFeJw9SXDRWF']
 
 def download(section, value):
     value -= 1
@@ -28,6 +46,18 @@ def download(section, value):
         return DUOS[value]
     elif section == 'scope':
         return SCOPES[value]
+    elif section == 'map_crosscounter':
+        return CROSS_COUNTERS[value]
+    elif section == 'map_crossport':
+        return CROSS_PORTS[value]
+    elif section == 'map_goldeneye':
+        return GOLDEN_EYES[value]
+    elif section == 'map_clubnight':
+        return CLUB_NIGHTS[value]
+    elif section == 'map_provence':
+        return PROVENCES[value]
+    elif section == 'map_trio':
+        return TRIOS[value]
 
 def setup(path):
     config = configparser.RawConfigParser()

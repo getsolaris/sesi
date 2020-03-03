@@ -159,6 +159,12 @@ class Application(tk.Frame):
         self.map_supply_checked = tk.IntVar()
         self.map_dragon_checked = tk.IntVar()
         self.map_duo_checked = tk.IntVar()
+        self.map_crosscounter_checked = tk.IntVar()
+        self.map_crossport_checked = tk.IntVar()
+        self.map_goldeneye_checked = tk.IntVar()
+        self.map_clubnight_checked = tk.IntVar()
+        self.map_provence_checked = tk.IntVar()
+        self.map_trio_checked = tk.IntVar()
         self.weapon_1_checked = tk.IntVar()
         self.scope_checked = tk.IntVar()
 
@@ -189,14 +195,71 @@ class Application(tk.Frame):
         self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_dragon_group, text='그림자제거', value=2,
                                               variable=self.map_dragon_checked)
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn3 = ttk.Radiobutton(self.map_dragon_group, text='화이트 스킨', value=3,
+                                              variable=self.map_dragon_checked)
+        self.map_tab_chkbtn3.pack(side='left', anchor='nw')
 
         self.map_duo_group = ttk.LabelFrame(self.map_tab, text='듀오', width=200, height=4)
-        self.map_duo_group.place(x=160, y=50)
+        self.map_duo_group.place(x=250, y=50)
         self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_duo_group, text='원본', value=1,
                                               variable=self.map_duo_checked)
         self.map_tab_chkbtn1.pack(side='left', anchor='nw')
         self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_duo_group, text='화이트 스킨', value=2,
                                               variable=self.map_duo_checked)
+        self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        self.map_crosscounter_group = ttk.LabelFrame(self.map_tab, text='크로스카운터', width=200, height=4)
+        self.map_crosscounter_group.place(x=8, y=97)
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_crosscounter_group, text='원본', value=1,
+                                              variable=self.map_crosscounter_checked)
+        self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_crosscounter_group, text='화이트 스킨', value=2,
+                                              variable=self.map_crosscounter_checked)
+        self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        # self.map_crossport_group = ttk.LabelFrame(self.map_tab, text='크로스포트', width=200, height=4)
+        # self.map_crossport_group.place(x=8, y=97)
+        # self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_crossport_group, text='원본', value=1,
+        #                                       variable=self.map_crossport_checked)
+        # self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        # self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_crossport_group, text='스킨', value=2,
+        #                                       variable=self.map_crossport_checked)
+        # self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        self.map_goldeneye_group = ttk.LabelFrame(self.map_tab, text='골든아이', width=200, height=4)
+        self.map_goldeneye_group.place(x=160, y=97)
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_goldeneye_group, text='원본', value=1,
+                                              variable=self.map_goldeneye_checked)
+        self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_goldeneye_group, text='화이트 스킨', value=2,
+                                              variable=self.map_goldeneye_checked)
+        self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        # self.map_clubnight_group = ttk.LabelFrame(self.map_tab, text='클럽나이트', width=200, height=4)
+        # self.map_goldeneye_group.place(x=315, y=97)
+        # self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_clubnight_group, text='원본', value=1,
+        #                                       variable=self.map_clubnight_checked)
+        # self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        # self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_clubnight_group, text='스킨', value=2,
+        #                                       variable=self.map_clubnight_checked)
+        # self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        self.map_provence_group = ttk.LabelFrame(self.map_tab, text='프로방스', width=200, height=4)
+        self.map_provence_group.place(x=8, y=143)
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_provence_group, text='원본', value=1,
+                                              variable=self.map_provence_checked)
+        self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_provence_group, text='화이트 스킨', value=2,
+                                              variable=self.map_provence_checked)
+        self.map_tab_chkbtn2.pack(side='left', anchor='nw')
+
+        self.map_trio_group = ttk.LabelFrame(self.map_tab, text='트리오', width=200, height=4)
+        self.map_trio_group.place(x=160, y=143)
+        self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_trio_group, text='원본', value=1,
+                                              variable=self.map_trio_checked)
+        self.map_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_trio_group, text='화이트 스킨', value=2,
+                                              variable=self.map_trio_checked)
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
 
         # ----------------------- Weapon
@@ -298,6 +361,42 @@ class Application(tk.Frame):
             self.download_process('듀오', url, self.search_path + '\\map_duo.zip',
                                   self.search_path + '\\game\\sa_tex2014\\slumdog')
 
+        if self.map_crosscounter_checked.get():
+            url = skin.download('map_crosscounter', self.map_crosscounter_checked.get()) + '/download'
+            checked = True
+            self.download_process('크로스카운터', url, self.search_path + '\\map_crosscounter.zip',
+                                  self.search_path + '\\game\\sa_tex\\awp')
+
+        if self.map_crossport_checked.get():
+            url = skin.download('map_crossport', self.map_crossport_checked.get()) + '/download'
+            checked = True
+            self.download_process('크로스포트', url, self.search_path + '\\map_crossport.zip',
+                                  self.search_path + '\\game\\sa_tex\\morocco')
+
+        if self.map_goldeneye_checked.get():
+            url = skin.download('map_goldeneye', self.map_goldeneye_checked.get()) + '/download'
+            checked = True
+            self.download_process('골든아이', url, self.search_path + '\\map_goldeneye.zip',
+                                  self.search_path + '\\game\\sa_tex\\japen')
+
+        if self.map_clubnight_checked.get():
+            url = skin.download('map_clubnight', self.map_clubnight_checked.get()) + '/download'
+            checked = True
+            self.download_process('클럽나이트', url, self.search_path + '\\map_clubnight.zip',
+                                  self.search_path + '\\game\\sa_tex\\nightclub')
+
+        if self.map_provence_checked.get():
+            url = skin.download('map_provence', self.map_provence_checked.get()) + '/download'
+            checked = True
+            self.download_process('프로방스', url, self.search_path + '\\map_provence.zip',
+                                  self.search_path + '\\game\\sa_tex\\provence')
+
+        if self.map_trio_checked.get():
+            url = skin.download('map_trio', self.map_trio_checked.get()) + '/download'
+            checked = True
+            self.download_process('트리오', url, self.search_path + '\\map_trio.zip',
+                                  self.search_path + '\\game\\sa_tex2013\\damascus')
+
         if self.weapon_1_checked.get():
             url = skin.download('weapon_flu', self.weapon_1_checked.get()) + '/download'
             checked = True
@@ -315,6 +414,12 @@ class Application(tk.Frame):
         self.map_supply_checked.set(0)
         self.map_dragon_checked.set(0)
         self.map_duo_checked.set(0)
+        self.map_crosscounter_checked.set(0)
+        self.map_crossport_checked.set(0)
+        self.map_goldeneye_checked.set(0)
+        self.map_clubnight_checked.set(0)
+        self.map_provence_checked.set(0)
+        self.map_trio_checked.set(0)
         self.weapon_1_checked.set(0)
         self.scope_checked.set(0)
 
