@@ -19,7 +19,9 @@ import path as skin, common, version_crawler as vc
 # constant
 CONTAINER_WIDTH = 500
 CONTAINER_HEIGHT = 318
-VERSION = '0.0.7'
+NOTEBOOK_WIDTH = 480
+NOTEBOOK_HEIGHT = 200
+VERSION = '0.0.8'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 BACKGROUND_COLOR = '#F5F6F8'
@@ -126,7 +128,7 @@ class Application(tk.Frame):
         self.path = ttk.Button(root, text='경로 자동검색', command=self.thread_path_search)
         self.path.place(x=10, y=10)
 
-        self.path_search_label = ttk.Label(root, text='\'경로 자동검색\' 버튼을 클릭하면 서든어택 경로를 자동으로 탐색합니다.')
+        self.path_search_label = ttk.Label(root, text='\'경로 자동검색\' 버튼은 서든어택 경로를 자동으로 탐색합니다.')
         self.path_search_label.place(x=10, y=40)
         common.create_tooltip(self.path, text='서든어택 경로를 자동검색합니다.')
 
@@ -140,16 +142,21 @@ class Application(tk.Frame):
         self.install = ttk.Button(root, text='설치', command=self.thread_install, width=4)
         self.install.place(x=437, y=10)
 
+        # self.clear = ttk.Button(root, text='체크 초기화', command=self.checked_clear)
+        # self.clear.place(x=395, y=43)
+        # self.clear.lift()
+        # common.create_tooltip(self.clear, text='모든 체크박스를 해제 하려면 \'체크 초기화\' 버튼을 클릭해주세요.')
+
         self.note = ttk.Notebook(root)
-        self.map_tab = ttk.Frame(self.note, width=480, height=200)
-        self.weapon_tab = ttk.Frame(self.note, width=480, height=200)
-        self.scope_tab = ttk.Frame(self.note, width=480, height=200)
-        self.ui_tab = ttk.Frame(self.note, width=480, height=200)
-        self.win_lose_tab = ttk.Frame(self.note, width=480, height=200)
-        self.my_files = ttk.Frame(self.note, width=480, height=200)
-        self.note.add(self.map_tab, text="Maps")
-        self.note.add(self.weapon_tab, text="Weapons")
-        self.note.add(self.scope_tab, text="Scope")
+        self.map_tab = ttk.Frame(self.note, width=NOTEBOOK_WIDTH, height=NOTEBOOK_HEIGHT)
+        self.weapon_tab = ttk.Frame(self.note, width=NOTEBOOK_WIDTH, height=NOTEBOOK_HEIGHT)
+        self.etc_tab = ttk.Frame(self.note, width=NOTEBOOK_WIDTH, height=NOTEBOOK_HEIGHT)
+        self.ui_tab = ttk.Frame(self.note, width=NOTEBOOK_WIDTH, height=NOTEBOOK_HEIGHT)
+        self.win_lose_tab = ttk.Frame(self.note, width=NOTEBOOK_WIDTH, height=NOTEBOOK_HEIGHT)
+        self.my_files = ttk.Frame(self.note, width=NOTEBOOK_WIDTH, height=NOTEBOOK_HEIGHT)
+        self.note.add(self.map_tab, text="맵")
+        self.note.add(self.weapon_tab, text="무기")
+        self.note.add(self.etc_tab, text="기타")
         # self.note.add(self.ui_tab, text="UI")
         # self.note.add(self.win_lose_tab, text="Win/Lose")
         # self.note.add(self.my_files, text="My Files")
@@ -167,6 +174,8 @@ class Application(tk.Frame):
         self.map_trio_checked = tk.IntVar()
         self.weapon_1_checked = tk.IntVar()
         self.scope_checked = tk.IntVar()
+        self.etc_sky_checked = tk.IntVar()
+        self.etc_wire_checked = tk.IntVar()
 
         # ----------------------- Map
         self.map_supply_group = ttk.Labelframe(self.map_tab, text='보급창고', width=200, height=4)
@@ -263,14 +272,17 @@ class Application(tk.Frame):
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
 
         # ----------------------- Weapon
-        self.weapon_group1 = ttk.LabelFrame(self.weapon_tab, text='Weapon 1', width=200, height=4)
+        self.weapon_group1 = ttk.LabelFrame(self.weapon_tab, text='형광스킨', width=200, height=4)
         self.weapon_group1.place(x=8, y=5)
-        self.weapon_tab1_chkbtn1 = ttk.Radiobutton(self.weapon_group1, text='형광스킨 (20.02.20)', value=1,
+        self.weapon_tab1_chkbtn1 = ttk.Radiobutton(self.weapon_group1, text='원본', value=1,
                                               variable=self.weapon_1_checked)
         self.weapon_tab1_chkbtn1.pack(side='left', anchor='nw')
+        self.weapon_tab1_chkbtn2 = ttk.Radiobutton(self.weapon_group1, text='형광스킨 (20.02.20)', value=2,
+                                              variable=self.weapon_1_checked)
+        self.weapon_tab1_chkbtn2.pack(side='left', anchor='nw')
 
         # ----------------------- Scope
-        self.scope_group = ttk.LabelFrame(self.scope_tab, text='Scopes', width=200, height=4)
+        self.scope_group = ttk.LabelFrame(self.etc_tab, text='스코프 (스나 조준경)', width=200, height=4)
         self.scope_group.place(x=8, y=5)
         self.scope_tab_chkbtn1 = ttk.Radiobutton(self.scope_group, text='원본', value=1,
                                                   variable=self.scope_checked)
@@ -284,6 +296,33 @@ class Application(tk.Frame):
         self.scope_tab_chkbtn4 = ttk.Radiobutton(self.scope_group, text='전체화면', value=4,
                                                   variable=self.scope_checked)
         self.scope_tab_chkbtn4.pack(side='left', anchor='nw')
+
+        self.sky_group = ttk.LabelFrame(self.etc_tab, text='하늘 스킨', width=200, height=4)
+        self.sky_group.place(x=8, y=50)
+        self.sky_tab_chkbtn1 = ttk.Radiobutton(self.sky_group, text='원본', value=1,
+                                                  variable=self.etc_sky_checked)
+        self.sky_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.sky_tab_chkbtn2 = ttk.Radiobutton(self.sky_group, text='에보 위폭', value=2,
+                                                  variable=self.etc_sky_checked)
+        self.sky_tab_chkbtn2.pack(side='left', anchor='nw')
+        self.sky_tab_chkbtn3 = ttk.Radiobutton(self.sky_group, text='회색 하늘', value=3,
+                                                  variable=self.etc_sky_checked)
+        self.sky_tab_chkbtn3.pack(side='left', anchor='nw')
+        self.sky_tab_chkbtn4 = ttk.Radiobutton(self.sky_group, text='밤 하늘', value=4,
+                                                  variable=self.etc_sky_checked)
+        self.sky_tab_chkbtn4.pack(side='left', anchor='nw')
+
+        self.wire_group = ttk.LabelFrame(self.etc_tab, text='철창 스킨', width=200, height=4)
+        self.wire_group.place(x=8, y=95)
+        self.wire_tab_chkbtn1 = ttk.Radiobutton(self.wire_group, text='원본', value=1,
+                                                  variable=self.etc_wire_checked)
+        self.wire_tab_chkbtn1.pack(side='left', anchor='nw')
+        self.wire_tab_chkbtn2 = ttk.Radiobutton(self.wire_group, text='화이트', value=2,
+                                                  variable=self.etc_wire_checked)
+        self.wire_tab_chkbtn2.pack(side='left', anchor='nw')
+        self.wire_tab_chkbtn3 = ttk.Radiobutton(self.wire_group, text='반투명', value=3,
+                                                  variable=self.etc_wire_checked)
+        self.wire_tab_chkbtn3.pack(side='left', anchor='nw')
 
     def thread_path_search(self):
         threading.Thread(target=self.search_path).start()
@@ -407,10 +446,18 @@ class Application(tk.Frame):
             checked = True
             self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface\\hud\\scope')
 
+        if self.sky_checked.get():
+            url = skin.download('sky', self.sky_checked.get()) + '/download'
+            checked = True
+            self.download_process('하늘스킨', url, self.search_path + '\\sky.zip', self.search_path + '\\game')
+
         if not checked:
             self.progress_text['text'] = '스킨을 선택해주세요. (선택 안되어있음)'
             return
 
+        self.checked_clear()
+
+    def checked_clear(self):
         self.map_supply_checked.set(0)
         self.map_dragon_checked.set(0)
         self.map_duo_checked.set(0)
@@ -422,6 +469,8 @@ class Application(tk.Frame):
         self.map_trio_checked.set(0)
         self.weapon_1_checked.set(0)
         self.scope_checked.set(0)
+        self.etc_sky_checked.set(0)
+        self.etc_wire_checked.set(0)
 
     def download_process(self, section, url, download_path, target):
         url = STORAGE_URL + url

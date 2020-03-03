@@ -1,10 +1,16 @@
 import configparser
 
 # MAP_SUPPLYS: default, white, victor, shadow_remove, W-skin
-SUPPLYS = ['oFSA4KKC9oSn9wH', 'ke2eTQSjmXWrq8t', 'sGbDLSWboM9aLGF', '7dKpcLTsgpyGTQ8', 'oFSA4KKC9oSn9wH']
+SUPPLYS = ['AjswetwKdj44zye', 'ke2eTQSjmXWrq8t', 'sGbDLSWboM9aLGF', '7dKpcLTsgpyGTQ8', '9CL2CqsHP2tMr99']
 
-# WEAPON_FLU
-FLU = ['KNx5sfYfzfFfXmQ']
+# WEAPON_FLU: default, flu
+FLU = ['tkqz8tE9q97b93o', 'KNx5sfYfzfFfXmQ']
+
+# SKYS: default, 3 supply high bomb, gray, night
+SKYS = ['bHpifyt7PF373Np', 'aMzbxLw2Fsi3CM4', '6fwBP9XKqKf7353', 'zr9M98anSTnzTrG']
+
+# WIRES: default, white, trans
+WIRES = ['QN5nNEdEwGidzyo', 'aYfecKG5NrgfYQL', 'CmmBKaqG5EWT7Jt']
 
 # SCOPE: default, rainbow, black_dragon, full
 SCOPES = ['QYDCAn2BxwNEWrH', 'itg8MoPnxyWDy5Z', '5zmEGCfjXRM3Fg4', 'xdyMDc6dxNCQSgL']
