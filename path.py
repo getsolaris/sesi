@@ -50,7 +50,7 @@ def download(section, value):
         return DRAGONS[value]
     elif section == 'map_duo':
         return DUOS[value]
-    elif section == 'scope':
+    elif section == 'etc_scope':
         return SCOPES[value]
     elif section == 'map_crosscounter':
         return CROSS_COUNTERS[value]
@@ -64,6 +64,10 @@ def download(section, value):
         return PROVENCES[value]
     elif section == 'map_trio':
         return TRIOS[value]
+    elif section == 'etc_sky':
+        return SKYS[value]
+    elif section == 'etc_wire':
+        return WIRES[value]
 
 def setup(path):
     config = configparser.RawConfigParser()

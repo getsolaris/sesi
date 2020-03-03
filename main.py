@@ -173,7 +173,7 @@ class Application(tk.Frame):
         self.map_provence_checked = tk.IntVar()
         self.map_trio_checked = tk.IntVar()
         self.weapon_1_checked = tk.IntVar()
-        self.scope_checked = tk.IntVar()
+        self.etc_scope_checked = tk.IntVar()
         self.etc_sky_checked = tk.IntVar()
         self.etc_wire_checked = tk.IntVar()
 
@@ -285,16 +285,16 @@ class Application(tk.Frame):
         self.scope_group = ttk.LabelFrame(self.etc_tab, text='스코프 (스나 조준경)', width=200, height=4)
         self.scope_group.place(x=8, y=5)
         self.scope_tab_chkbtn1 = ttk.Radiobutton(self.scope_group, text='원본', value=1,
-                                                  variable=self.scope_checked)
+                                                  variable=self.etc_scope_checked)
         self.scope_tab_chkbtn1.pack(side='left', anchor='nw')
         self.scope_tab_chkbtn2 = ttk.Radiobutton(self.scope_group, text='무지개', value=2,
-                                                  variable=self.scope_checked)
+                                                  variable=self.etc_scope_checked)
         self.scope_tab_chkbtn2.pack(side='left', anchor='nw')
         self.scope_tab_chkbtn3 = ttk.Radiobutton(self.scope_group, text='흑룡', value=3,
-                                                  variable=self.scope_checked)
+                                                  variable=self.etc_scope_checked)
         self.scope_tab_chkbtn3.pack(side='left', anchor='nw')
         self.scope_tab_chkbtn4 = ttk.Radiobutton(self.scope_group, text='전체화면', value=4,
-                                                  variable=self.scope_checked)
+                                                  variable=self.etc_scope_checked)
         self.scope_tab_chkbtn4.pack(side='left', anchor='nw')
 
         self.sky_group = ttk.LabelFrame(self.etc_tab, text='하늘 스킨', width=200, height=4)
@@ -441,15 +441,20 @@ class Application(tk.Frame):
             checked = True
             self.download_process('형광', url, self.search_path + '\\weapon_flu.zip', self.search_path + '\\game')
 
-        if self.scope_checked.get():
-            url = skin.download('scope', self.scope_checked.get()) + '/download'
+        if self.etc_scope_checked.get():
+            url = skin.download('etc_scope', self.etc_scope_checked.get()) + '/download'
             checked = True
             self.download_process('스코프', url, self.search_path + '\\scope.zip', self.search_path + '\\game\\sa_interface\\hud\\scope')
 
-        if self.sky_checked.get():
-            url = skin.download('sky', self.sky_checked.get()) + '/download'
+        if self.etc_sky_checked.get():
+            url = skin.download('etc_sky', self.etc_sky_checked.get()) + '/download'
             checked = True
             self.download_process('하늘스킨', url, self.search_path + '\\sky.zip', self.search_path + '\\game')
+
+        if self.etc_wire_checked.get():
+            url = skin.download('etc_wire', self.etc_wire_checked.get()) + '/download'
+            checked = True
+            self.download_process('철창스킨', url, self.search_path + '\\wire.zip', self.search_path + '\\game\\sa_tex\\tank')
 
         if not checked:
             self.progress_text['text'] = '스킨을 선택해주세요. (선택 안되어있음)'
@@ -468,7 +473,7 @@ class Application(tk.Frame):
         self.map_provence_checked.set(0)
         self.map_trio_checked.set(0)
         self.weapon_1_checked.set(0)
-        self.scope_checked.set(0)
+        self.etc_scope_checked.set(0)
         self.etc_sky_checked.set(0)
         self.etc_wire_checked.set(0)
 
