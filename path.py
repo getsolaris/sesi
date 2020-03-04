@@ -7,7 +7,7 @@ SUPPLYS = ['AjswetwKdj44zye', 'ke2eTQSjmXWrq8t', 'sGbDLSWboM9aLGF', '7dKpcLTsgpy
 FLU = ['tkqz8tE9q97b93o', 'KNx5sfYfzfFfXmQ']
 
 # SKYS: default, 3 supply high bomb, gray, night
-SKYS = ['bHpifyt7PF373Np', 'aMzbxLw2Fsi3CM4', '6fwBP9XKqKf7353', 'zr9M98anSTnzTrG']
+SKYS = ['TSrT8W2nFpfs2TH', 'aMzbxLw2Fsi3CM4', '6fwBP9XKqKf7353', 'zr9M98anSTnzTrG']
 
 # WIRES: default, white, trans
 WIRES = ['QN5nNEdEwGidzyo', 'aYfecKG5NrgfYQL', 'CmmBKaqG5EWT7Jt']
@@ -28,7 +28,7 @@ CROSS_COUNTERS = ['dfAeqRdJwH2rHPa', 'EBxgzDMEHPE4PbB']
 CROSS_PORTS = ['X2skLzg6EJoPGKo']
 
 # GOLDEN EYES: default, white
-GOLDEN_EYES = ['JCbYWig46GPy85N', 'C3HrTMtoNR7dKZ9']
+GOLDEN_EYES = ['JCbYWig46GPy85N', 'HYXDGCKjtmScdJs']
 
 # CLUB NIGHT: default, renew
 CLUB_NIGHTS = ['i5WHkiaQe83RMm9']

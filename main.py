@@ -240,7 +240,7 @@ class Application(tk.Frame):
         self.map_tab_chkbtn1 = ttk.Radiobutton(self.map_goldeneye_group, text='원본', value=1,
                                               variable=self.map_goldeneye_checked)
         self.map_tab_chkbtn1.pack(side='left', anchor='nw')
-        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_goldeneye_group, text='화이트 스킨', value=2,
+        self.map_tab_chkbtn2 = ttk.Radiobutton(self.map_goldeneye_group, text='그림자제거', value=2,
                                               variable=self.map_goldeneye_checked)
         self.map_tab_chkbtn2.pack(side='left', anchor='nw')
 
@@ -416,7 +416,7 @@ class Application(tk.Frame):
             url = skin.download('map_goldeneye', self.map_goldeneye_checked.get()) + '/download'
             checked = True
             self.download_process('골든아이', url, self.search_path + '\\map_goldeneye.zip',
-                                  self.search_path + '\\game\\sa_tex\\japen')
+                                  self.search_path + '\\game\\sa_tex\\japan')
 
         if self.map_clubnight_checked.get():
             url = skin.download('map_clubnight', self.map_clubnight_checked.get()) + '/download'
