@@ -21,7 +21,7 @@ CONTAINER_WIDTH = 500
 CONTAINER_HEIGHT = 318
 NOTEBOOK_WIDTH = 480
 NOTEBOOK_HEIGHT = 200
-VERSION = '0.0.8'
+VERSION = '0.0.9'
 STORAGE_URL = 'https://box.minemy.me/cloud/index.php/s/'
 SUDDENATTACK_PROCESS = 'ghsalncr.exe'
 BACKGROUND_COLOR = '#F5F6F8'
@@ -484,6 +484,11 @@ class Application(tk.Frame):
 
         response = requests.get(url, stream=True)
         total_size = int(response.headers.get('content-length', 0))
+
+        if not total_size:
+            self.progress_text['text'] = section + ' 스킨 다운로드에 실패하였습니다.'
+            return
+
         block_size = 1024
         t = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
         with open(download_path, 'wb') as f:
