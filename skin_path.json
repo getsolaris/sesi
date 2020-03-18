@@ -1,14 +1,14 @@
 {
-  "SUPPLYS": ["AjswetwKdj44zye", "ke2eTQSjmXWrq8t", "sGbDLSWboM9aLGF", "7dKpcLTsgpyGTQ8", "9CL2CqsHP2tMr99"],
-  "FLU": ["tkqz8tE9q97b93o", "KNx5sfYfzfFfXmQ"],
-  "SKYS": ["TSrT8W2nFpfs2TH", "aMzbxLw2Fsi3CM4", "6fwBP9XKqKf7353", "zr9M98anSTnzTrG"],
-  "WIRES": ["QN5nNEdEwGidzyo", "aYfecKG5NrgfYQL", "CmmBKaqG5EWT7Jt"],
-  "SCOPES": ["QYDCAn2BxwNEWrH", "itg8MoPnxyWDy5Z", "5zmEGCfjXRM3Fg4", "xdyMDc6dxNCQSgL"],
-  "DRAGONS": ["83TbHkXSL3jY2wp", "oQp8TYp7FAdfjkj", "8p34GSjAHmDa5Ca"],
-  "DUOS": ["7qSn5PSJzE76iR9", "N4c8cKgcRQDXTmL"],
-  "CROSS_COUNTERS": ["dfAeqRdJwH2rHPa", "EBxgzDMEHPE4PbB"],
-  "CROSS_PORT": ["X2skLzg6EJoPGKo"],
-  "GOLDEN_EYES": ["JCbYWig46GPy85N", "HYXDGCKjtmScdJs"],
-  "PROVENCES": ["RetX4K4L6ZPbwzG", "F877tqD4G5yngR3"],
-  "TRIOS": ["EtFnjxmR3HgrsrC", "DGnJFeJw9SXDRWF"]
+  "map_supply": ["AjswetwKdj44zye", "ke2eTQSjmXWrq8t", "sGbDLSWboM9aLGF", "7dKpcLTsgpyGTQ8", "9CL2CqsHP2tMr99"],
+  "weapon_flu": ["tkqz8tE9q97b93o", "KNx5sfYfzfFfXmQ"],
+  "etc_sky": ["TSrT8W2nFpfs2TH", "aMzbxLw2Fsi3CM4", "6fwBP9XKqKf7353", "zr9M98anSTnzTrG"],
+  "etc_wire": ["QN5nNEdEwGidzyo", "aYfecKG5NrgfYQL", "CmmBKaqG5EWT7Jt"],
+  "etc_scope": ["QYDCAn2BxwNEWrH", "itg8MoPnxyWDy5Z", "5zmEGCfjXRM3Fg4", "xdyMDc6dxNCQSgL"],
+  "map_dragon": ["83TbHkXSL3jY2wp", "oQp8TYp7FAdfjkj", "8p34GSjAHmDa5Ca"],
+  "map_duo": ["7qSn5PSJzE76iR9", "N4c8cKgcRQDXTmL"],
+  "map_crosscounter": ["dfAeqRdJwH2rHPa", "EBxgzDMEHPE4PbB"],
+  "map_crossport": ["X2skLzg6EJoPGKo"],
+  "map_goldeneye": ["JCbYWig46GPy85N", "HYXDGCKjtmScdJs"],
+  "map_provence": ["RetX4K4L6ZPbwzG", "F877tqD4G5yngR3"],
+  "map_trio": ["EtFnjxmR3HgrsrC", "DGnJFeJw9SXDRWF"]
 }
